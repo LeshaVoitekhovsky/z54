@@ -1,2 +1,2 @@
-def task_3_1(name: str):
+def task_3(name: str):
     return f"Hello, [{name}]!"
