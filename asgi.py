@@ -7,6 +7,7 @@ from starlette.responses import HTMLResponse
 from starlette.responses import Response
 
 import db
+import telegram
 from lessons import task_3
 from users import gen_random_name
 from users import get_user
@@ -14,6 +15,11 @@ from util import apply_cache_headers
 from util import static_response
 
 app = FastAPI()
+
+@app.get('/telegram/about')
+def _():
+    r = telegram.getMe()
+    return r
 
 
 @app.get("/", response_class=HTMLResponse)
