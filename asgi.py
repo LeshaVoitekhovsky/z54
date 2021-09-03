@@ -8,7 +8,7 @@ from fastapi.requests import Request
 from fastapi.responses import Response
 
 import db
-import telegram
+import tg
 from lessons import task_3
 from users import gen_random_name
 from users import get_user
@@ -20,26 +20,26 @@ app = FastAPI()
 
 
 @app.get("/tg/about")
-async def _(client: httpx.AsyncClient = telegram.Telegram):
-    user = await telegram.getMe(client)
+async def _(client: httpx.AsyncClient = tg.Telegram):
+    user = await tg.getMe(client)
     return user
 
 
 @app.get("/tg/webhook")
-async def _(client: httpx.AsyncClient = telegram.Telegram):
-    whi = await telegram.getWebhookInfo(client)
+async def _(client: httpx.AsyncClient = tg.Telegram):
+    whi = await tg.getWebhookInfo(client)
     return whi
 
 
 @app.post("/tg/webhook")
 async def _(
-    client: httpx.AsyncClient = telegram.Telegram,
-    whi: telegram.WebhookInfo = Body(...),
+    client: httpx.AsyncClient = tg.Telegram,
+    whi: tg.WebhookInfo = Body(...),
     authorization: str = Header(""),
 ):
     authorize(authorization)
-    webhook_set = await telegram.setWebhook(client, whi)
-    whi = await telegram.getWebhookInfo(client)
+    webhook_set = await tg.setWebhook(client, whi)
+    whi = await tg.getWebhookInfo(client)
     return {
         "ok": webhook_set,
         "webhook": whi,
