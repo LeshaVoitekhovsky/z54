@@ -5,6 +5,8 @@ import httpx
 token = os.getenv("TG_BOT_TOKEN")
 assert token, "no tg token provided"
 
+
+
 def api_call(method_name: str):
     url = f'https://api.telegram.org/bot{token}/{method_name}'
 
