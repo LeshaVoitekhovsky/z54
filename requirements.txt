@@ -3,3 +3,5 @@ uvicorn
 psycopg2-binary
 pytest
 pytest-asyncio
+django
+dj-database-url
