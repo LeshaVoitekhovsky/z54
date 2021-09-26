@@ -7,9 +7,9 @@
 <body>
 <article>
     <h1>{{ object.title }}</h1>
-    <a href='{% url 'all-posts' %}'>(back to all posts)</a>
-    <a href='{% url 'update-post' object.pk %}'>(edit post)</a>
-    <a href='{% url 'delete-post' object.pk %}'>(delete post)</a>
+    <a href='{% url 'blog:all' %}'>(back to all posts)</a>
+    <a href='{% url 'blog:update' object.pk %}'>(edit post)</a>
+    <a href='{% url 'blog:delete' object.pk %}'>(delete post)</a>
     <hr>
     <p>{{ post.content|default:'(no content)'}}</p>
 </article>

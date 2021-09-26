@@ -8,7 +8,7 @@ class AllPostsView(ListView):
     model = Post
 
     def get_queryset(self):
-        return self.model.objects.filter(hidden=False)
+        return super().get_queryset().filter(hidden=False)
 
 
 class SinglePostView(DetailView):
@@ -17,7 +17,7 @@ class SinglePostView(DetailView):
 
 class DeletePostView(DeleteView):
     model = Post
-    success_url = reverse_lazy('all-posts')
+    success_url = reverse_lazy('blog:all')
 
 
 class CreatePostView(CreateView):
