@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<article>
+    <h1>{{ object.title }}</h1>
+    <a href='{% url 'all-posts' %}'>(back to all posts)</a>
+    <a href='{% url 'update-post' object.pk %}'>(edit post)</a>
+    <a href='{% url 'delete-post' object.pk %}'>(delete post)</a>
+    <hr>
+    <p>{{ post.content|default:'(no content)'}}</p>
+</article>
+</body>
+</html>
