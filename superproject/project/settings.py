@@ -6,7 +6,7 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = 'django-insecure-voud%ci5!0n8hv+9m1+q$!j9t%_1@)*&c^9q0na3zapq9qrl^v'
+SECRET_KEY = '1'
 
 DEBUG = bool(os.getenv('DEBUG'))
 
@@ -25,11 +25,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'task4',
+    'blog',
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     #'django.middleware.csrf.CsrfViewMiddleware',

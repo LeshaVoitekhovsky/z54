@@ -10,10 +10,11 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpRequest
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.shortcuts import render
 
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-
+from django.views.generic import ListView
 
 from task4.models import Numbers
 
@@ -21,13 +22,6 @@ from task4.models import Numbers
 def get_user_name(request: HttpRequest) -> Optional[str]:
     name = request.headers.get("x-user") or None
     return name
-
-
-def create_new_user_name() -> str:
-    def word() -> str:
-        return "".join(choice(ascii_lowercase) for _ in range(6))
-
-    return "-".join(word() for _ in "123")
 
 
 def set_user_name(response: HttpResponse, name: str) -> None:
@@ -99,3 +93,7 @@ def task(request: HttpRequest) -> HttpResponse:
 
     set_user_name(response, name)
     return response
+
+class ShowNumbersView(ListView):
+    template_name = 'task4/numbers.html'
+    model = Numbers
