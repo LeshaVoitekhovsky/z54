@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,15 +7,22 @@
 <body>
 <article>
     <h1>All posts</h1>
-    <a href='{% url 'blog:new' %}'>New post</a>
+    {% if not user.is_anonymous %}
+        <a href="{% url 'blog:new' %}">New post</a>
+    {% else %}
+        <a href="/login/">Log In</a>
+    {% endif %}
     <hr>
     {% for post in object_list %}
-        <section id='id_post_{{ post.pk }}'>
-            <a href='{{ post.get_absolute_url }}'><h2>{{ post.title }}</h2></a>
-            <p>{{ post.content|default:'(no content)'}}</p>
+        <section id="id_post_{{ post.pk }}">
+            <a href="{{ post.get_absolute_url }}"><h2>{{ post.title }}</h2></a>
+            <p>{{ post.content|default:"(no content)" }}</p>
         </section>
     {% empty %}
-        <li>Sorry, no posts in this list.</li>
+        <p>(no posts)</p>
+        {% if not user.is_anonymous %}
+            <p><a href="{% url 'blog:new' %}">(create)</a></p>
+        {% endif %}
     {% endfor %}
 </article>
 </body>
