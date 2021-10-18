@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
 
 from blog.models import Post
+from rest_framework import serializers, viewsets
 
 
 class BlogMixin:
@@ -42,3 +43,16 @@ class CreatePostView(LoginRequiredMixin, BlogMixin, CreateView):
 
 class UpdatePostView(LoginRequiredMixin, BlogMixin, OwnerMixin, UpdateView):
     pass
+
+
+class PostSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Post
+        depth = 1
+        fields = ["id", "title", "content", "hidden", "author_id"]
+
+
+class PostViewSet(viewsets.ModelViewSet):
+    lookup_field = "id"
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer

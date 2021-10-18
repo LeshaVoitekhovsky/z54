@@ -7,7 +7,7 @@
 <body>
   <form method="post">
         {% csrf_token %}
-        {{ form }}
+        {{ form.as_p }}
         <button type='submit'>{{ action|default:'Log in!' }}</button>
     </form>
 </body>
