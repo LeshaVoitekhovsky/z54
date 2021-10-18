@@ -14,11 +14,7 @@ SECRET_KEY = '1'
 
 DEBUG = bool(os.getenv('DEBUG'))
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-    "tms54.herokuapp.com",
-]
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -38,7 +34,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -87,6 +83,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+if DEBUG:
+    AUTH_PASSWORD_VALIDATORS = []
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -120,4 +119,4 @@ CORS_ALLOW_HEADERS = [
 ]
 
 
-LOGIN_REDIRECT_URL = '/blog/'
+LOGIN_REDIRECT_URL = reverse_lazy("blog:all")
